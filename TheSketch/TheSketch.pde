@@ -1,6 +1,4 @@
 
-float max_distance;
-
 ControlFrame cf;
 
 void settings() {
@@ -12,32 +10,27 @@ void settings() {
 
 void setup() {
 
-    // Show statistics
     showStatistics = false;
+
+    setupScenes();
 
     // Open the Controls window
     cf = new ControlFrame(this, 400, 640, "Controls");
     surface.setLocation(420, 10);
-
-    noStroke();
-    max_distance = dist(0, 0, width, height);
 }
 
 void draw() {
-    drawScene();
-    showStatistics();
-}
 
-void drawScene() {
-
-    background(0);
-    fill(255);
-
-    for (int i = 0; i <= width; i += 20) {
-        for (int j = 0; j <= height; j += 20) {
-            float size = dist(mouseX, mouseY, i, j);
-            size = size / max_distance * slider4;
-            ellipse(i, j, size, size);
-        }
+    if (selectedScene != currentScene) {
+        changedScene = true;
+        currentScene = selectedScene;
     }
+    if (changedScene) {
+        background(0);
+        surface.setTitle("TheSketch || Scene: "
+            + scenes[selectedScene].sceneName + "(" + selectedScene + ")");
+        changedScene = false;
+    }
+    scenes[selectedScene].show();
+    showStatistics();
 }
