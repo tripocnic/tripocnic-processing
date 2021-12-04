@@ -21,6 +21,8 @@ void setup() {
 
 void draw() {
 
+    push();
+
     if (selectedSceneNb != currentSceneNb) {
         changedScene = true;
         currentSceneNb = selectedSceneNb;
@@ -33,7 +35,6 @@ void draw() {
 
         if (!currentScene.setupDone) {
             currentScene.setup();
-
         }
         currentScene.reset();
         controlFrame.reset();
@@ -42,4 +43,6 @@ void draw() {
 
     currentScene.show();
     showStatistics();
+
+    pop();
 }

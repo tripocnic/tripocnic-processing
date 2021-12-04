@@ -17,10 +17,10 @@ void showStatistics()
         return;
     }
 
-    pushStyle();
-    colorMode(HSB, 360, 100, 100);
+    push();
     int textSize = 20;
 
+    stroke(255);
     strokeWeight(2);
     // Draw rectangle background
     rectMode(CORNER);
@@ -31,10 +31,10 @@ void showStatistics()
     textSize(textSize);
     fill(255);
     text("Size: " + width + "x" + height + " FPS: " + int(frameRate),
-        10, yStatCorner + textSize);
+         10, yStatCorner + textSize);
     showMemoryUsage(yStatCorner, textSize);
 
-    popStyle();
+    pop();
 }
 
 void showMemoryUsage(int yStatCorner, int textSize)

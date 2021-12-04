@@ -15,8 +15,9 @@ class Scene00 extends SceneHandler
     }
 
     void show() {
+        background(0);
         noFill();
-        stroke(255,255,255);
+        stroke(255);
         rect(50,50, 180,50);
         fill(255);
         textSize(32);
