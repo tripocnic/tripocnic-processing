@@ -1,6 +1,8 @@
 SceneHandler[] scenes;
+SceneHandler currentScene;
+int currentSceneNb = 0;
+
 boolean changedScene = true;
-int currentScene = 0;
 
 void setupScenes()
 {
@@ -8,15 +10,19 @@ void setupScenes()
         new Scene00(),
         new Scene01(),
     };
+    currentSceneNb = scenes.length;
 }
 
 class SceneHandler
 {
     String sceneName;
+    boolean setupDone;
 
     SceneHandler() {
         sceneName = "UNDEFINED";
+        setupDone = false;
     }
     void setup() {}
+    void reset() {}
     void show() {}
 }

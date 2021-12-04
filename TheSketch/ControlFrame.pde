@@ -1,7 +1,7 @@
 import controlP5.*;
 
 // selectedScene
-int selectedScene;
+int selectedSceneNb;
 
 // -10 to 10
 int slider1, slider2, slider3;
@@ -34,12 +34,12 @@ class ControlFrame extends PApplet {
         surface.setLocation(10, 10);
         cp5 = new ControlP5(this);
 
-        cp5.addSlider("selectedScene")
-           .plugTo(parent, "selectedScene")
+        cp5.addSlider("selectedSceneNb")
+           .plugTo(parent, "selectedSceneNb")
            .setPosition(50, 20)
            .setSize(250, 30)
            .setRange(0, scenes.length - 1)
-           .setValue(currentScene)
+           .setValue(currentSceneNb)
            .setNumberOfTickMarks(scenes.length)
            .setSliderMode(Slider.FLEXIBLE);
 

@@ -5,11 +5,21 @@ class Scene00 extends SceneHandler
         sceneName = "Scene 00";
     }
 
+    void setup() {
+        println("Setup: " + sceneName);
+        setupDone = true;
+    }
+
+    void reset() {
+        println("Reset: " + sceneName);
+    }
+
     void show() {
         noFill();
-        stroke(0,0,255);
-        rect(50,50, 150,50);
+        stroke(255,255,255);
+        rect(50,50, 180,50);
         fill(255);
-        text("Showing Scene 1", 60,70);
+        textSize(32);
+        text("TheSketch", 60,85);
     }
 }

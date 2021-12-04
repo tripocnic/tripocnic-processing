@@ -6,6 +6,15 @@ class Scene01 extends SceneHandler
 
     float max_distance = dist(0, 0, width, height);
 
+    void setup() {
+        println("Setup: " + sceneName);
+        setupDone = true;
+    }
+
+    void reset() {
+        println("Reset: " + sceneName);
+    }
+
     void show() {
         background(0);
         noStroke();

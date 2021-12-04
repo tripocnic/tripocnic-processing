@@ -1,5 +1,5 @@
 
-ControlFrame cf;
+ControlFrame controlFrame;
 
 void settings() {
     // fullScreen(P3D, 2);
@@ -15,22 +15,31 @@ void setup() {
     setupScenes();
 
     // Open the Controls window
-    cf = new ControlFrame(this, 400, 640, "Controls");
+    controlFrame = new ControlFrame(this, 400, 640, "Controls");
     surface.setLocation(420, 10);
 }
 
 void draw() {
 
-    if (selectedScene != currentScene) {
+    if (selectedSceneNb != currentSceneNb) {
         changedScene = true;
-        currentScene = selectedScene;
+        currentSceneNb = selectedSceneNb;
+        currentScene = scenes[currentSceneNb];
     }
     if (changedScene) {
         background(0);
         surface.setTitle("TheSketch || Scene: "
-            + scenes[selectedScene].sceneName + "(" + selectedScene + ")");
+            + currentScene.sceneName + "(" + currentSceneNb + ")");
+
+        if (!currentScene.setupDone) {
+            currentScene.setup();
+
+        }
+        currentScene.reset();
+        controlFrame.reset();
         changedScene = false;
     }
-    scenes[selectedScene].show();
+
+    currentScene.show();
     showStatistics();
 }
