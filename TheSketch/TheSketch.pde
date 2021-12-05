@@ -36,8 +36,8 @@ void draw() {
         if (!currentScene.setupDone) {
             currentScene.setup();
         }
-        currentScene.reset();
         controlFrame.reset();
+        currentScene.reset();
         changedScene = false;
     }
 

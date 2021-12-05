@@ -1,3 +1,4 @@
+// http://www.sojamo.de/libraries/controlP5/reference/index.html
 import controlP5.*;
 
 // selectedScene
@@ -11,6 +12,9 @@ int slider4;
 
 // 1 to 1000
 int slider5;
+
+// slider2D
+Slider2D xy;
 
 class ControlFrame extends PApplet {
 
@@ -73,6 +77,12 @@ class ControlFrame extends PApplet {
            .setPosition(50, 280)
            .setSize(250, 25);
 
+        xy = cp5.addSlider2D("XY")
+            .setPosition(50,350)
+            .setSize(250,250)
+            .setMinMax(0,0,parent.width,parent.height)
+         ;
+
         reset();
     }
 
@@ -82,6 +92,7 @@ class ControlFrame extends PApplet {
         cp5.getController("slider3").setValue(0);
         cp5.getController("slider4").setValue(50);
         cp5.getController("slider5").setValue(50);
+        xy.setValue(0, 0);
     }
 
     void draw() {

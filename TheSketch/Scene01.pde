@@ -13,6 +13,8 @@ class Scene01 extends SceneHandler
 
     void reset() {
         println("Reset: " + sceneName);
+        xy.setCursorX(width/2);
+        xy.setCursorY(height/2);
     }
 
     void show() {
@@ -22,7 +24,7 @@ class Scene01 extends SceneHandler
 
         for (int i = 0; i <= width; i += 20) {
             for (int j = 0; j <= height; j += 20) {
-                float size = dist(mouseX, mouseY, i, j);
+                float size = dist(xy.getArrayValue()[0], xy.getArrayValue()[1], i, j);
                 size= size / max_distance * slider4;
                 ellipse(i, j, size, size);
             }
