@@ -1,5 +1,6 @@
 
 ControlFrame controlFrame;
+boolean saveNextFrame = false;
 
 void settings() {
     // fullScreen(P3D, 2);
@@ -36,12 +37,20 @@ void draw() {
         if (!currentScene.setupDone) {
             currentScene.setup();
         }
+        resetCurrentScene = true;
+        changedScene = false;
+    }
+    if (resetCurrentScene) {
         controlFrame.reset();
         currentScene.reset();
-        changedScene = false;
+        resetCurrentScene = false;
     }
 
     currentScene.show();
+    if (saveNextFrame) {
+        saveCurrentFrame();
+        saveNextFrame = false;
+    }
     showStatistics();
 
     pop();

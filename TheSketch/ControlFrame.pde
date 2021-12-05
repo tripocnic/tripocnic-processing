@@ -80,8 +80,7 @@ class ControlFrame extends PApplet {
         xy = cp5.addSlider2D("XY")
             .setPosition(50,350)
             .setSize(250,250)
-            .setMinMax(0,0,parent.width,parent.height)
-         ;
+            .setMinMax(0,0,parent.width,parent.height);
 
         reset();
     }
@@ -100,9 +99,6 @@ class ControlFrame extends PApplet {
     }
 
     void keyPressed() {
-        if (key == 'R') {
-            println("Reset controllers values");
-            reset();
-        }
+        handleKeys(this);
     }
 }

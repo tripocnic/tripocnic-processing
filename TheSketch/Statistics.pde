@@ -5,8 +5,8 @@ boolean showStatistics = true;
 // y start of the top left corner for statistics drawing
 int yStatCorner = 50;
 
-void toggleStatisticsWith_S() {
-    if (key == 'S') {
+void toggleStatisticsWith_S(PApplet sketch) {
+    if (sketch.key == 'S') {
         showStatistics = !showStatistics;
     }
 }
