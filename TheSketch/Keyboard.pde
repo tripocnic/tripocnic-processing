@@ -6,6 +6,7 @@ void keyPressed()
 
 void handleKeys(PApplet sketch) {
     printHelpKeysWith_h(sketch);
+    printSceneNamesWith_l(sketch);
     saveNextFrameWith_s(sketch);
     resetCurrentSceneWith_r(sketch);
     toggleStatisticsWith_S(sketch);
@@ -26,6 +27,7 @@ void printHelpKeysWith_h(PApplet sketch)
     }
 
     println("------ Help with Keys");
+    println("l - list scene names");
     println("s - save current frame");
     println("r - reset current scene");
     println("S - showStatistics: " + showStatistics);
