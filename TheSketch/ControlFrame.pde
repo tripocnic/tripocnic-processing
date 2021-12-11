@@ -1,3 +1,4 @@
+// http://www.sojamo.de/libraries/controlP5/reference/index.html
 import controlP5.*;
 
 // selectedScene
@@ -11,6 +12,9 @@ int slider4;
 
 // 1 to 1000
 int slider5;
+
+// slider2D
+Slider2D xy;
 
 class ControlFrame extends PApplet {
 
@@ -28,6 +32,7 @@ class ControlFrame extends PApplet {
 
     public void settings() {
         size(w, h);
+        smooth(8);
     }
 
     public void setup() {
@@ -36,6 +41,7 @@ class ControlFrame extends PApplet {
 
         cp5.addSlider("selectedSceneNb")
            .plugTo(parent, "selectedSceneNb")
+           .setLabel("Scene Selector")
            .setPosition(50, 20)
            .setSize(250, 30)
            .setRange(0, scenes.length - 1)
@@ -73,15 +79,27 @@ class ControlFrame extends PApplet {
            .setPosition(50, 280)
            .setSize(250, 25);
 
+        xy = cp5.addSlider2D("XY")
+            .setPosition(50,350)
+            .setSize(250,250)
+            .setMinMax(0,0,parent.width,parent.height);
+
         reset();
     }
 
     void reset() {
         cp5.getController("slider1").setValue(0);
+        cp5.getController("slider1").setLabel("Not_Used");
         cp5.getController("slider2").setValue(0);
+        cp5.getController("slider2").setLabel("Not_Used");
         cp5.getController("slider3").setValue(0);
+        cp5.getController("slider3").setLabel("Not_Used");
         cp5.getController("slider4").setValue(50);
+        cp5.getController("slider4").setLabel("Not_Used");
         cp5.getController("slider5").setValue(50);
+        cp5.getController("slider5").setLabel("Not_Used");
+        xy.setValue(0, 0);
+        xy.setLabel("Not_Used");
     }
 
     void draw() {
@@ -89,9 +107,6 @@ class ControlFrame extends PApplet {
     }
 
     void keyPressed() {
-        if (key == 'R') {
-            println("Reset controllers values");
-            reset();
-        }
+        handleKeys(this);
     }
 }

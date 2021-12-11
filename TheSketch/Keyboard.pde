@@ -1,34 +1,32 @@
 
 void keyPressed()
 {
-    printHelpKeysWith_h();
-    saveCurrentFrameWith_s();
-    toggleStatisticsWith_S();
+    handleKeys(this);
 }
 
-void saveCurrentFrameWith_s()
+void handleKeys(PApplet sketch) {
+    printHelpKeysWith_h(sketch);
+    saveNextFrameWith_s(sketch);
+    resetCurrentSceneWith_r(sketch);
+    toggleStatisticsWith_S(sketch);
+}
+
+void saveNextFrameWith_s(PApplet sketch)
 {
-    if (key != 's') {
+    if (sketch.key != 's') {
         return;
     }
-
-    String timestamp = year() + nf(month(), 2) + nf(day(), 2)
-        + "_" + nf(hour(), 2) + nf(minute(), 2) + nf(second(), 2)
-        + "_" + nf(millis(), 8);
-
-    String filename = "SavedFrames/" + getClass().getName()
-        + "_" + timestamp + ".png";
-    saveFrame(filename);
-    println("Frame saved: " + filename);
+    saveNextFrame = true;
 }
 
-void printHelpKeysWith_h()
+void printHelpKeysWith_h(PApplet sketch)
 {
-    if (key != 'h') {
+    if (sketch.key != 'h') {
         return;
     }
 
     println("------ Help with Keys");
     println("s - save current frame");
+    println("r - reset current scene");
     println("S - showStatistics: " + showStatistics);
 }
