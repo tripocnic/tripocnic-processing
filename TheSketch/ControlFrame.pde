@@ -41,6 +41,7 @@ class ControlFrame extends PApplet {
 
         cp5.addSlider("selectedSceneNb")
            .plugTo(parent, "selectedSceneNb")
+           .setLabel("Scene Selector")
            .setPosition(50, 20)
            .setSize(250, 30)
            .setRange(0, scenes.length - 1)
