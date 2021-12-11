@@ -5,7 +5,7 @@ class Scene00 extends SceneHandler
     float circleSize;
 
     public Scene00() {
-        sceneName = "Scene 00";
+        sceneName = "TheTemplate";
     }
 
     void setup() {
