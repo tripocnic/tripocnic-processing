@@ -13,6 +13,8 @@ class Scene01 extends SceneHandler
 
     void reset() {
         println("Reset: " + sceneName);
+        controlFrame.cp5.getController("slider4").setLabel("Size");
+        xy.setLabel("XY");
         xy.setCursorX(width/2);
         xy.setCursorY(height/2);
     }

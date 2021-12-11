@@ -4,7 +4,7 @@ boolean saveNextFrame = false;
 
 void settings() {
     // fullScreen(P3D, 2);
-    // size(1080, 1080, P3D);
+    // size(1000, 1000, P3D);
     size(640, 640, P3D);
     smooth(8);
 }

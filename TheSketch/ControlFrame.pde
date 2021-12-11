@@ -32,6 +32,7 @@ class ControlFrame extends PApplet {
 
     public void settings() {
         size(w, h);
+        smooth(8);
     }
 
     public void setup() {
@@ -87,11 +88,17 @@ class ControlFrame extends PApplet {
 
     void reset() {
         cp5.getController("slider1").setValue(0);
+        cp5.getController("slider1").setLabel("Not_Used");
         cp5.getController("slider2").setValue(0);
+        cp5.getController("slider2").setLabel("Not_Used");
         cp5.getController("slider3").setValue(0);
+        cp5.getController("slider3").setLabel("Not_Used");
         cp5.getController("slider4").setValue(50);
+        cp5.getController("slider4").setLabel("Not_Used");
         cp5.getController("slider5").setValue(50);
+        cp5.getController("slider5").setLabel("Not_Used");
         xy.setValue(0, 0);
+        xy.setLabel("Not_Used");
     }
 
     void draw() {
