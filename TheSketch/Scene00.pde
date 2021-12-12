@@ -15,7 +15,7 @@ class Scene00 extends SceneHandler
 
     void reset() {
         println("Reset: " + sceneName);
-        controlFrame.cp5.getController("slider4").setLabel("Circle Size");
+        slider4.setLabel("Circle Size");
         xy.setLabel("XY");
         xy.setCursorX(50);
         xy.setCursorY(50);
@@ -23,9 +23,9 @@ class Scene00 extends SceneHandler
 
     void show() {
         background(0);
-        x = xy.getArrayValue()[0];
-        y = xy.getArrayValue()[1];
-        circleSize = slider4;
+        x = round(xy.getArrayValue()[0]);
+        y = round(xy.getArrayValue()[1]);
+        circleSize = round(slider4.getValue());
 
         noFill();
         stroke(255);

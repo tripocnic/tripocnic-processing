@@ -1,35 +1,39 @@
 class Scene01 extends SceneHandler
 {
     public Scene01() {
-        sceneName = "Scene 01";
+        sceneName = "TheTruchetTiles";
     }
 
-    float max_distance = dist(0, 0, width, height);
+    Grid grid;
+    int nbOfDefaultCellsPerRowColumn = 15;
+    int currentNbOfCellsPerRowColumn;
+    boolean defaultDrawCellBorders = false;
+    boolean currentDrawCellBorders;
 
     void setup() {
         println("Setup: " + sceneName);
+
+        grid = new Grid(nbOfDefaultCellsPerRowColumn, nbOfDefaultCellsPerRowColumn, width, height);
+
         setupDone = true;
     }
 
     void reset() {
         println("Reset: " + sceneName);
-        controlFrame.cp5.getController("slider4").setLabel("Size");
-        xy.setLabel("XY");
-        xy.setCursorX(width/2);
-        xy.setCursorY(height/2);
+        slider4.setLabel("Grid Size");
+        slider4.setValue(nbOfDefaultCellsPerRowColumn + .001); // bug? 15 -> 14 without .001
+        toggle1.setLabel("Show Grid Border");
+        toggle1.setValue(defaultDrawCellBorders);
+        grid.reset();
     }
 
     void show() {
-        background(0);
-        noStroke();
-        fill(255);
+        currentNbOfCellsPerRowColumn = round(slider4.getValue());
+        grid.setSize(currentNbOfCellsPerRowColumn);
 
-        for (int i = 0; i <= width; i += 20) {
-            for (int j = 0; j <= height; j += 20) {
-                float size = dist(xy.getArrayValue()[0], xy.getArrayValue()[1], i, j);
-                size= size / max_distance * slider4;
-                ellipse(i, j, size, size);
-            }
-        }
+        currentDrawCellBorders = toggle1.getBooleanValue();
+        grid.setDrawCellBorders(currentDrawCellBorders);
+
+        grid.draw();
     }
 }
