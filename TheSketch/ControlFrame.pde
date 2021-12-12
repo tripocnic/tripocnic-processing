@@ -22,6 +22,8 @@ class ControlFrame extends PApplet {
     PApplet parent;
     ControlP5 cp5;
 
+    boolean ready = false;
+
     public ControlFrame(PApplet _parent, int _w, int _h, String _name) {
         super();
         parent = _parent;
@@ -100,6 +102,8 @@ class ControlFrame extends PApplet {
         cp5.getController("slider5").setLabel("Not_Used");
         xy.setValue(0, 0);
         xy.setLabel("Not_Used");
+
+        ready = true;
     }
 
     void draw() {

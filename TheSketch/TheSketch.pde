@@ -21,6 +21,9 @@ void setup() {
 }
 
 void draw() {
+    if (!controlFrame.ready) {
+        return;
+    }
 
     push();
 
