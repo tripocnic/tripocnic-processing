@@ -1,35 +1,94 @@
 class Scene01 extends SceneHandler
 {
     public Scene01() {
-        sceneName = "Scene 01";
+        sceneName = "TheTruchetTiles";
     }
 
-    float max_distance = dist(0, 0, width, height);
+    Grid grid;
+    TilesSet tilesSet;
+    int defaultTilesStyle = 0;
+    int currentTilesStyle;
+    int nbOfDefaultCellsPerRowColumn = 15;
+    int currentNbOfCellsPerRowColumn;
+    int defaultStrokeWeight = 4;
+    int currentStrokeWeight;
+    boolean defaultDrawCellBorders = false;
+    boolean currentDrawCellBorders;
 
     void setup() {
         println("Setup: " + sceneName);
+
+        grid = new Grid(nbOfDefaultCellsPerRowColumn, nbOfDefaultCellsPerRowColumn, width, height);
+        tilesSet = new TilesSet();
+
         setupDone = true;
     }
 
     void reset() {
         println("Reset: " + sceneName);
-        controlFrame.cp5.getController("slider4").setLabel("Size");
-        xy.setLabel("XY");
-        xy.setCursorX(width/2);
-        xy.setCursorY(height/2);
+        slider3.setRange(0, tilesSet.nbTiles()-1)
+            .setLabel("Tiles style")
+            .setValue(0)
+            .setNumberOfTickMarks(tilesSet.nbTiles())
+            .setSliderMode(Slider.FLEXIBLE);
+        slider4.setLabel("Grid Size")
+            .setValue(nbOfDefaultCellsPerRowColumn + .001); // bug? 15 -> 14 without .001
+        slider5.setRange(1, 100)
+            .setLabel("StrokeWeight")
+            .setValue(defaultStrokeWeight);
+        toggle1.setLabel("Show Grid Border")
+            .setValue(defaultDrawCellBorders);
+        grid.reset();
     }
 
     void show() {
-        background(0);
-        noStroke();
-        fill(255);
+        currentTilesStyle = round(slider3.getValue());
+        grid.setTiles(tilesSet.get(currentTilesStyle));
 
-        for (int i = 0; i <= width; i += 20) {
-            for (int j = 0; j <= height; j += 20) {
-                float size = dist(xy.getArrayValue()[0], xy.getArrayValue()[1], i, j);
-                size= size / max_distance * slider4;
-                ellipse(i, j, size, size);
-            }
-        }
+        currentNbOfCellsPerRowColumn = round(slider4.getValue());
+        grid.setSize(currentNbOfCellsPerRowColumn);
+
+        currentStrokeWeight = round(slider5.getValue());
+        grid.setStrokeWeight(currentStrokeWeight);
+
+        currentDrawCellBorders = toggle1.getBooleanValue();
+        grid.setDrawCellBorders(currentDrawCellBorders);
+
+        grid.draw();
+    }
+}
+
+class TilesSet
+{
+    ArrayList<Tiles> tiles;
+
+    final int SIMPLE = 0;
+    final int ARCS = 1;
+    final int ROAD = 2;
+
+    TilesSet()
+    {
+        tiles = new ArrayList<Tiles>();
+
+        // SIMPLE
+        TileSimple tileSimple = new TileSimple();
+        tiles.add(tileSimple);
+
+        // ARCS
+        TileArcs tileArcs = new TileArcs();
+        tiles.add(tileArcs);
+
+        // ROAD
+        TileRoad tileRoad = new TileRoad();
+        tiles.add(tileRoad);
+    }
+
+    int nbTiles(){
+        return tiles.size();
+    }
+
+    Tiles get(int index)
+    {
+      return tiles.get(index);
     }
 }

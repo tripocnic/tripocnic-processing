@@ -5,22 +5,27 @@ import controlP5.*;
 int selectedSceneNb;
 
 // -10 to 10
-int slider1, slider2, slider3;
+Slider slider1, slider2, slider3;
 
 // 1 to 100
-int slider4;
+Slider slider4;
 
 // 1 to 1000
-int slider5;
+Slider slider5;
 
 // slider2D
 Slider2D xy;
+
+// toggles
+Toggle toggle1, toggle2, toggle3;
 
 class ControlFrame extends PApplet {
 
     int w, h;
     PApplet parent;
     ControlP5 cp5;
+
+    boolean ready = false;
 
     public ControlFrame(PApplet _parent, int _w, int _h, String _name) {
         super();
@@ -49,57 +54,98 @@ class ControlFrame extends PApplet {
            .setNumberOfTickMarks(scenes.length)
            .setSliderMode(Slider.FLEXIBLE);
 
-        cp5.addSlider("slider1")
-           .plugTo(parent, "slider1")
-           .setRange(-10, 10)
-           .setPosition(50, 100)
-           .setSize(250, 20);
+        slider1 = cp5.addSlider("slider1")
+           .setPosition(50, 80)
+           .setSize(250, 20)
+           .setDecimalPrecision(0);
 
-        cp5.addSlider("slider2")
-           .plugTo(parent, "slider2")
-           .setRange(-10, 10)
+        slider2 = cp5.addSlider("slider2")
+           .setPosition(50, 110)
+           .setSize(250, 20)
+           .setDecimalPrecision(0);
+
+        slider3 = cp5.addSlider("slider3")
            .setPosition(50, 140)
-           .setSize(250, 20);
+           .setSize(250, 20)
+           .setDecimalPrecision(0);
 
-        cp5.addSlider("slider3")
-           .plugTo(parent, "slider3")
-           .setRange(-10, 10)
+        slider4 = cp5.addSlider("slider4")
            .setPosition(50, 180)
-           .setSize(250, 20);
+           .setSize(250, 25)
+           .setDecimalPrecision(0);
 
-        cp5.addSlider("slider4")
-           .plugTo(parent, "slider4")
-           .setRange(1, 100)
-           .setPosition(50, 230)
-           .setSize(250, 25);
-
-        cp5.addSlider("slider5")
-           .plugTo(parent, "slider5")
-           .setRange(1, 1000)
-           .setPosition(50, 280)
-           .setSize(250, 25);
+        slider5 = cp5.addSlider("slider5")
+           .setPosition(50, 215)
+           .setSize(250, 25)
+           .setDecimalPrecision(0);
 
         xy = cp5.addSlider2D("XY")
-            .setPosition(50,350)
-            .setSize(250,250)
-            .setMinMax(0,0,parent.width,parent.height);
+            .setPosition(50, 260)
+            .setSize(250, 250)
+            .setMinMax(0, 0, parent.width, parent.height);
+
+        toggle1 = cp5.addToggle("toggle1")
+            .setPosition(50,530)
+            .setSize(50,20);
+
+        toggle2 = cp5.addToggle("toggle2")
+            .setPosition(150,530)
+            .setSize(50,20);
+
+        toggle3 = cp5.addToggle("toggle3")
+            .setPosition(250,530)
+            .setSize(50,20);
 
         reset();
     }
 
     void reset() {
-        cp5.getController("slider1").setValue(0);
-        cp5.getController("slider1").setLabel("Not_Used");
-        cp5.getController("slider2").setValue(0);
-        cp5.getController("slider2").setLabel("Not_Used");
-        cp5.getController("slider3").setValue(0);
-        cp5.getController("slider3").setLabel("Not_Used");
-        cp5.getController("slider4").setValue(50);
-        cp5.getController("slider4").setLabel("Not_Used");
-        cp5.getController("slider5").setValue(50);
-        cp5.getController("slider5").setLabel("Not_Used");
-        xy.setValue(0, 0);
-        xy.setLabel("Not_Used");
+        slider1.setRange(-10, 10)
+            .showTickMarks(false)
+            .snapToTickMarks(false)
+            .setSliderMode(Slider.FIX)
+            .setValue(0)
+            .setLabel("Not_Used");
+
+        slider2.setRange(-10, 10)
+            .showTickMarks(false)
+            .snapToTickMarks(false)
+            .setSliderMode(Slider.FIX)
+            .setValue(0)
+            .setLabel("Not_Used");
+
+        slider3.setRange(-10, 10)
+            .showTickMarks(false)
+            .snapToTickMarks(false)
+            .setSliderMode(Slider.FIX)
+            .setValue(0)
+            .setLabel("Not_Used");
+
+        slider4.setRange(1, 100)
+            .showTickMarks(false)
+            .snapToTickMarks(false)
+            .setSliderMode(Slider.FIX)
+            .setValue(50)
+            .setLabel("Not_Used");
+
+        slider5.setRange(1, 1000)
+            .showTickMarks(false)
+            .snapToTickMarks(false)
+            .setSliderMode(Slider.FIX)
+            .setValue(50)
+            .setLabel("Not_Used");
+
+        xy.setValue(0, 0)
+            .setLabel("Not_Used");
+
+        toggle1.setValue(false)
+            .setLabel("Not_Used");
+        toggle2.setValue(false)
+            .setLabel("Not_Used");
+        toggle3.setValue(false)
+            .setLabel("Not_Used");
+
+        ready = true;
     }
 
     void draw() {

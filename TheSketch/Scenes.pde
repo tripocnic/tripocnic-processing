@@ -36,6 +36,19 @@ void resetCurrentSceneWith_r(PApplet sketch)
     resetCurrentScene = true;
 }
 
+void printSceneNamesWith_l(PApplet sketch)
+{
+    if (sketch.key != 'l') {
+        return;
+    }
+
+    println("------ Scenes list");
+    for (int i = 0; i < scenes.length; ++i) {
+        println("  " + nf(i, 2) + " : " + scenes[i].sceneName);
+    }
+}
+
+
 void saveCurrentFrame()
 {
     String timestamp = year() + nf(month(), 2) + nf(day(), 2)
