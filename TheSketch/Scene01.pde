@@ -7,6 +7,8 @@ class Scene01 extends SceneHandler
     Grid grid;
     int nbOfDefaultCellsPerRowColumn = 15;
     int currentNbOfCellsPerRowColumn;
+    int defaultStrokeWeight = 4;
+    int currentStrokeWeight;
     boolean defaultDrawCellBorders = false;
     boolean currentDrawCellBorders;
 
@@ -15,6 +17,9 @@ class Scene01 extends SceneHandler
 
         grid = new Grid(nbOfDefaultCellsPerRowColumn, nbOfDefaultCellsPerRowColumn, width, height);
 
+        Tiles tiles = new TileSimple();
+        grid.setTiles(tiles);
+
         setupDone = true;
     }
 
@@ -22,6 +27,9 @@ class Scene01 extends SceneHandler
         println("Reset: " + sceneName);
         slider4.setLabel("Grid Size");
         slider4.setValue(nbOfDefaultCellsPerRowColumn + .001); // bug? 15 -> 14 without .001
+        slider5.setRange(1, 100);
+        slider5.setLabel("StrokeWeight");
+        slider5.setValue(defaultStrokeWeight);
         toggle1.setLabel("Show Grid Border");
         toggle1.setValue(defaultDrawCellBorders);
         grid.reset();
@@ -30,6 +38,9 @@ class Scene01 extends SceneHandler
     void show() {
         currentNbOfCellsPerRowColumn = round(slider4.getValue());
         grid.setSize(currentNbOfCellsPerRowColumn);
+
+        currentStrokeWeight = round(slider5.getValue());
+        grid.setStrokeWeight(currentStrokeWeight);
 
         currentDrawCellBorders = toggle1.getBooleanValue();
         grid.setDrawCellBorders(currentDrawCellBorders);

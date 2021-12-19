@@ -11,10 +11,11 @@ class Grid {
     GridCell[] cells;
     boolean drawBorders;
 
+    Tiles tiles;
+    int strokeWeight = 4;
+
     boolean dirty = true;
     boolean needRedraw = true;
-
-    int strokeWeight = 4;
 
     Grid(int defaultNbCellsX, int defaultNbCellsY, int gridWidth, int gridHeight)
     {
@@ -22,6 +23,12 @@ class Grid {
         this.defaultNbCellsY = defaultNbCellsY;
         this.gridWidth = gridWidth;
         this.gridHeight = gridHeight;
+    }
+
+    void setTiles(Tiles tiles)
+    {
+        this.tiles = tiles;
+        dirty = true;
     }
 
     void initGrid(int nbCellX, int nbCellY)
@@ -43,6 +50,7 @@ class Grid {
             for (int j = 0; j < nbCellX; ++j)
             {
                 this.cells[j+i*nbCellX] = new GridCell(j*cellWidth, i*cellHeight, cellWidth, cellHeight);
+                this.cells[j+i*nbCellX].setTiles(tiles);
             }
         }
         println("Grid set to: number of cells:", nbCellX, "x", nbCellY, "-> cell size:", cellWidth, "x", cellHeight);
@@ -102,6 +110,16 @@ class Grid {
             nbCellX = nbOfCellsPerRowColumn;
             nbCellY = nbOfCellsPerRowColumn;
             dirty = true;
+        }
+    }
+
+    void setStrokeWeight(int newStrokeWeight)
+    {
+        if (newStrokeWeight < 1) { newStrokeWeight = 1; }
+
+        if (newStrokeWeight != strokeWeight) {
+            strokeWeight = newStrokeWeight;
+            needRedraw = true;
         }
     }
 

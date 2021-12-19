@@ -4,6 +4,8 @@ public class GridCell
     int posY;
     int cellWidth;
     int cellHeight;
+    Tiles tiles;
+    int tileToDraw;
 
     public GridCell(int posX, int posY, int cellWidth, int cellHeight)
     {
@@ -13,8 +15,19 @@ public class GridCell
         this.cellHeight = cellHeight;
     }
 
+    void setTiles(Tiles tiles)
+    {
+        this.tiles = tiles;
+        if (tiles != null) {
+            tileToDraw = tiles.getRandomTileValue();
+        }
+    }
+
     void draw(boolean drawBorders)
     {
+        if (tiles != null) {
+            tiles.draw(posX, posY, cellWidth, cellHeight, tileToDraw);
+        }
         if (drawBorders)
         {
             drawBorders();
