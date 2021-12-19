@@ -100,35 +100,50 @@ class ControlFrame extends PApplet {
     }
 
     void reset() {
-        slider1.setRange(-10, 10);
-        slider1.setValue(0);
-        slider1.setLabel("Not_Used");
+        slider1.setRange(-10, 10)
+            .showTickMarks(false)
+            .snapToTickMarks(false)
+            .setSliderMode(Slider.FIX)
+            .setValue(0)
+            .setLabel("Not_Used");
 
-        slider2.setRange(-10, 10);
-        slider2.setValue(0);
-        slider2.setLabel("Not_Used");
+        slider2.setRange(-10, 10)
+            .showTickMarks(false)
+            .snapToTickMarks(false)
+            .setSliderMode(Slider.FIX)
+            .setValue(0)
+            .setLabel("Not_Used");
 
-        slider3.setRange(-10, 10);
-        slider3.setValue(0);
-        slider3.setLabel("Not_Used");
+        slider3.setRange(-10, 10)
+            .showTickMarks(false)
+            .snapToTickMarks(false)
+            .setSliderMode(Slider.FIX)
+            .setValue(0)
+            .setLabel("Not_Used");
 
-        slider4.setRange(1, 100);
-        slider4.setValue(50);
-        slider4.setLabel("Not_Used");
+        slider4.setRange(1, 100)
+            .showTickMarks(false)
+            .snapToTickMarks(false)
+            .setSliderMode(Slider.FIX)
+            .setValue(50)
+            .setLabel("Not_Used");
 
-        slider5.setRange(1, 1000);
-        slider5.setValue(50);
-        slider5.setLabel("Not_Used");
+        slider5.setRange(1, 1000)
+            .showTickMarks(false)
+            .snapToTickMarks(false)
+            .setSliderMode(Slider.FIX)
+            .setValue(50)
+            .setLabel("Not_Used");
 
-        xy.setValue(0, 0);
-        xy.setLabel("Not_Used");
+        xy.setValue(0, 0)
+            .setLabel("Not_Used");
 
-        toggle1.setValue(false);
-        toggle1.setLabel("Not_Used");
-        toggle2.setValue(false);
-        toggle2.setLabel("Not_Used");
-        toggle3.setValue(false);
-        toggle3.setLabel("Not_Used");
+        toggle1.setValue(false)
+            .setLabel("Not_Used");
+        toggle2.setValue(false)
+            .setLabel("Not_Used");
+        toggle3.setValue(false)
+            .setLabel("Not_Used");
 
         ready = true;
     }

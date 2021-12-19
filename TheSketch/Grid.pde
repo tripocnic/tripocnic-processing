@@ -25,12 +25,6 @@ class Grid {
         this.gridHeight = gridHeight;
     }
 
-    void setTiles(Tiles tiles)
-    {
-        this.tiles = tiles;
-        dirty = true;
-    }
-
     void initGrid(int nbCellX, int nbCellY)
     {
         this.nbCellX = nbCellX;
@@ -97,38 +91,48 @@ class Grid {
         dirty = true;
     }
 
-    void setSize(int nbOfCells)
+    void setTiles(Tiles tiles)
     {
-        int nbOfCellsPerRowColumn = nbCellX;
-
-        nbOfCellsPerRowColumn = nbOfCells;
-        if (nbOfCellsPerRowColumn <= 0) { nbOfCellsPerRowColumn = 1; }
-        else if (nbOfCellsPerRowColumn > 150) { nbOfCellsPerRowColumn = 150; }
-
-        if (nbOfCellsPerRowColumn != nbCellX)
-        {
-            nbCellX = nbOfCellsPerRowColumn;
-            nbCellY = nbOfCellsPerRowColumn;
-            dirty = true;
+        if (this.tiles == tiles) {
+            return;
         }
+        this.tiles = tiles;
+        dirty = true;
+    }
+
+    void setSize(int newNbOfCells)
+    {
+        if (newNbOfCells <= 0) { newNbOfCells = 1; }
+        else if (newNbOfCells > 150) { newNbOfCells = 150; }
+
+        if (newNbOfCells == nbCellX) {
+            return;
+        }
+
+        nbCellX = newNbOfCells;
+        nbCellY = newNbOfCells;
+        dirty = true;
     }
 
     void setStrokeWeight(int newStrokeWeight)
     {
         if (newStrokeWeight < 1) { newStrokeWeight = 1; }
 
-        if (newStrokeWeight != strokeWeight) {
-            strokeWeight = newStrokeWeight;
-            needRedraw = true;
-        }
-    }
-
-    void setDrawCellBorders(boolean value)
-    {
-        if (value == drawBorders) {
+        if (newStrokeWeight == strokeWeight) {
             return;
         }
-        drawBorders = value;
+
+        strokeWeight = newStrokeWeight;
+        needRedraw = true;
+    }
+
+    void setDrawCellBorders(boolean newDrawBorders)
+    {
+        if (newDrawBorders == drawBorders) {
+            return;
+        }
+
+        drawBorders = newDrawBorders;
         needRedraw = true;
     }
 }

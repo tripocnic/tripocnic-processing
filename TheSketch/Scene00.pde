@@ -16,9 +16,9 @@ class Scene00 extends SceneHandler
     void reset() {
         println("Reset: " + sceneName);
         slider4.setLabel("Circle Size");
-        xy.setLabel("XY");
-        xy.setCursorX(50);
-        xy.setCursorY(50);
+        xy.setLabel("XY")
+            .setCursorX(50)
+            .setCursorY(50);
     }
 
     void show() {
