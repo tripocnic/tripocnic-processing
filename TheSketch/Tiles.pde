@@ -1,7 +1,7 @@
 
 abstract class Tiles
 {
-    abstract void draw(int x, int y, int w, int h, int tileToDraw);
+    abstract void draw(int x, int y, int w, int h, int tileToDraw, GridCellData data);
     abstract int nbTiles();
     int getRandomTileValue() { return int(random(nbTiles())); }
 }
@@ -14,7 +14,7 @@ class TileSimple extends Tiles
 
     int nbTiles() { return 2; }
 
-    void draw(int x, int y, int w, int h, int tileToDraw)
+    void draw(int x, int y, int w, int h, int tileToDraw, GridCellData data)
     {
         switch(tileToDraw) {
             case RIGHT:
@@ -35,7 +35,7 @@ class TileArcs extends Tiles
     static final int RIGHT = 1;
     int nbTiles() { return 2; }
 
-    void draw(int x, int y, int w, int h, int tileToDraw)
+    void draw(int x, int y, int w, int h, int tileToDraw, GridCellData data)
     {
         switch(tileToDraw) {
             case RIGHT:
@@ -58,7 +58,7 @@ class TileRoad extends Tiles
     static final int ROUNDABOUT = 3;
     int nbTiles() { return 4; }
 
-    void draw(int x, int y, int w, int h, int tileToDraw)
+    void draw(int x, int y, int w, int h, int tileToDraw, GridCellData data)
     {
         switch(tileToDraw) {
             case ARC1:
