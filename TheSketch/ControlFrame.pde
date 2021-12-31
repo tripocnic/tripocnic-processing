@@ -27,6 +27,19 @@ class ControlFrame extends PApplet {
 
     boolean ready = false;
 
+    boolean controlsChanged;
+    float slider1Value, slider2Value, slider3Value;
+    boolean slider1Changed, slider2Changed, slider3Changed;
+
+    float slider4Value, slider5Value;
+    boolean slider4Changed, slider5Changed;
+
+    float xyValue0, xyValue1;
+    boolean xyChanged;
+
+    boolean toggle1Value, toggle2Value, toggle3Value;
+    boolean toggle1Changed, toggle2Changed, toggle3Changed;
+
     public ControlFrame(PApplet _parent, int _w, int _h, String _name) {
         super();
         parent = _parent;
@@ -145,14 +158,84 @@ class ControlFrame extends PApplet {
         toggle3.setValue(false)
             .setLabel("Not_Used");
 
+        controlsChanged = true;
         ready = true;
     }
 
     void draw() {
         background(170);
+
+        handleControlsValues();
+
+        controlsChanged = slider1Changed || slider2Changed || slider3Changed || slider4Changed || slider5Changed;
+        controlsChanged = controlsChanged || xyChanged;
+        controlsChanged = controlsChanged || toggle1Changed || toggle2Changed || toggle3Changed;
     }
 
     void keyPressed() {
         handleKeys(this);
+    }
+
+    void acknowledgeControls()
+    {
+        slider1Changed = false;
+        slider2Changed = false;
+        slider3Changed = false;
+        slider4Changed = false;
+        slider5Changed = false;
+        xyChanged = false;
+        toggle1Changed = false;
+        toggle2Changed = false;
+        toggle3Changed = false;
+        controlsChanged = false;
+    }
+
+    void handleControlsValues()
+    {
+        if (slider1.getValue() != slider1Value)
+        {
+            slider1Value = slider1.getValue();
+            slider1Changed = true;
+        }
+        if (slider2.getValue() != slider2Value)
+        {
+            slider2Value = slider2.getValue();
+            slider2Changed = true;
+        }
+        if (slider3.getValue() != slider3Value)
+        {
+            slider3Value = slider3.getValue();
+            slider3Changed = true;
+        }
+        if (slider4.getValue() != slider4Value)
+        {
+            slider4Value = slider4.getValue();
+            slider4Changed = true;
+        }
+        if (slider5.getValue() != slider5Value)
+        {
+            slider5Value = slider5.getValue();
+            slider5Changed = true;
+        }
+        if (xy.getArrayValue()[0] != xyValue0 || xy.getArrayValue()[1] != xyValue1) {
+            xyValue0 = xy.getArrayValue()[0];
+            xyValue1 = xy.getArrayValue()[1];
+            xyChanged = true;
+        }
+        if (toggle1.getBooleanValue() != toggle1Value)
+        {
+            toggle1Value = toggle1.getBooleanValue();
+            toggle1Changed = true;
+        }
+        if (toggle2.getBooleanValue() != toggle2Value)
+        {
+            toggle2Value = toggle2.getBooleanValue();
+            toggle2Changed = true;
+        }
+        if (toggle3.getBooleanValue() != toggle3Value)
+        {
+            toggle3Value = toggle3.getBooleanValue();
+            toggle3Changed = true;
+        }
     }
 }

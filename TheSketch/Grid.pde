@@ -58,7 +58,7 @@ class Grid {
             return;
         }
         if (cellsData.length != cells.length) {
-            println("CellsData not applied: cellsData.size(", cellsData.length, ") is not equal to cells.size(", cells.length, ")");
+            println("CellsData not applied: cellsData.length(", cellsData.length, ") is not equal to cells.length(", cells.length, ")");
             return;
         }
 

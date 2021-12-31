@@ -64,6 +64,11 @@ class Scene02 extends SceneHandler
     }
 
     void show() {
+        if (!controlFrame.controlsChanged)
+        {
+            return;
+        }
+
         currentTilesStyle = round(slider3.getValue());
         grid.setTiles(tilesSet.get(currentTilesStyle));
 
@@ -103,6 +108,8 @@ class Scene02 extends SceneHandler
         grid.setDrawCellBorders(currentDrawCellBorders);
 
         grid.draw();
+
+        controlFrame.acknowledgeControls();
     }
 
     class TilesSet
