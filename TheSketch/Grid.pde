@@ -129,7 +129,7 @@ class Grid {
             return;
         }
         this.cellsData = cellsData;
-        needRedraw = true;
+        dirty = true;
     }
 
     void setSize(int newNbOfCells)

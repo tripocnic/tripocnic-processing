@@ -56,33 +56,27 @@ class ControlFrame extends PApplet {
 
         slider1 = cp5.addSlider("slider1")
            .setPosition(50, 80)
-           .setSize(250, 20)
-           .setDecimalPrecision(0);
+           .setSize(250, 20);
 
         slider2 = cp5.addSlider("slider2")
            .setPosition(50, 110)
-           .setSize(250, 20)
-           .setDecimalPrecision(0);
+           .setSize(250, 20);
 
         slider3 = cp5.addSlider("slider3")
            .setPosition(50, 140)
-           .setSize(250, 20)
-           .setDecimalPrecision(0);
+           .setSize(250, 20);
 
         slider4 = cp5.addSlider("slider4")
            .setPosition(50, 180)
-           .setSize(250, 25)
-           .setDecimalPrecision(0);
+           .setSize(250, 25);
 
         slider5 = cp5.addSlider("slider5")
            .setPosition(50, 215)
-           .setSize(250, 25)
-           .setDecimalPrecision(0);
+           .setSize(250, 25);
 
         xy = cp5.addSlider2D("XY")
             .setPosition(50, 260)
-            .setSize(250, 250)
-            .setMinMax(0, 0, parent.width, parent.height);
+            .setSize(250, 250);
 
         toggle1 = cp5.addToggle("toggle1")
             .setPosition(50,530)
@@ -105,6 +99,7 @@ class ControlFrame extends PApplet {
             .snapToTickMarks(false)
             .setSliderMode(Slider.FIX)
             .setValue(0)
+            .setDecimalPrecision(0)
             .setLabel("Not_Used");
 
         slider2.setRange(-10, 10)
@@ -112,6 +107,7 @@ class ControlFrame extends PApplet {
             .snapToTickMarks(false)
             .setSliderMode(Slider.FIX)
             .setValue(0)
+            .setDecimalPrecision(0)
             .setLabel("Not_Used");
 
         slider3.setRange(-10, 10)
@@ -119,6 +115,7 @@ class ControlFrame extends PApplet {
             .snapToTickMarks(false)
             .setSliderMode(Slider.FIX)
             .setValue(0)
+            .setDecimalPrecision(0)
             .setLabel("Not_Used");
 
         slider4.setRange(1, 100)
@@ -126,6 +123,7 @@ class ControlFrame extends PApplet {
             .snapToTickMarks(false)
             .setSliderMode(Slider.FIX)
             .setValue(50)
+            .setDecimalPrecision(0)
             .setLabel("Not_Used");
 
         slider5.setRange(1, 1000)
@@ -133,10 +131,12 @@ class ControlFrame extends PApplet {
             .snapToTickMarks(false)
             .setSliderMode(Slider.FIX)
             .setValue(50)
+            .setDecimalPrecision(0)
             .setLabel("Not_Used");
 
         xy.setValue(0, 0)
-            .setLabel("Not_Used");
+            .setLabel("Not_Used")
+            .setMinMax(0, 0, parent.width, parent.height);
 
         toggle1.setValue(false)
             .setLabel("Not_Used");

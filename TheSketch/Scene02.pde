@@ -15,6 +15,14 @@ class Scene02 extends SceneHandler
     boolean defaultDrawCellBorders = false;
     boolean currentDrawCellBorders;
 
+    boolean defaultIsFilled = true;
+    boolean currentIsFilled;
+
+    int noiseLod; // number of octaves to be used by the noise
+    float noiseFallOff; // falloff factor for each octave
+    float noiseX;
+    float noiseY;
+
     void setup() {
         println("Setup: " + sceneName);
 
@@ -26,18 +34,32 @@ class Scene02 extends SceneHandler
 
     void reset() {
         println("Reset: " + sceneName);
+        slider1.setRange(0, 20)
+            .setLabel("Noise Lod")
+            .setValue(4)
+            .setNumberOfTickMarks(20)
+            .setSliderMode(Slider.FLEXIBLE);
+        slider2.setLabel("Noise Falloff")
+            .setRange(0, 1)
+            .setValue(.35)
+            .setDecimalPrecision(2);
         slider3.setRange(0, tilesSet.nbTiles() - 1)
-           .setLabel("Tiles style")
-           .setValue(0)
-           .setNumberOfTickMarks(tilesSet.nbTiles())
-           .setSliderMode(Slider.FLEXIBLE);
+            .setLabel("Tiles style")
+            .setValue(0)
+            .setNumberOfTickMarks(tilesSet.nbTiles())
+            .setSliderMode(Slider.FLEXIBLE);
         slider4.setLabel("Grid Size")
-           .setValue(nbOfDefaultCellsPerRowColumn +.001); // bug? 15 -> 14 without .001
+            .setValue(nbOfDefaultCellsPerRowColumn +.001); // bug? 15 -> 14 without .001
         slider5.setRange(1, 100)
-           .setLabel("StrokeWeight")
-           .setValue(defaultStrokeWeight);
+            .setLabel("StrokeWeight")
+            .setValue(defaultStrokeWeight);
         toggle1.setLabel("Show Grid Border")
-           .setValue(defaultDrawCellBorders);
+            .setValue(defaultDrawCellBorders);
+        toggle2.setLabel("Fill")
+            .setValue(defaultIsFilled);
+        xy.setLabel("Noise Pos")
+            .setValue(0, 0)
+            .setMinMax(0, 0, 100, 100);
         grid.reset();
     }
 
@@ -48,23 +70,31 @@ class Scene02 extends SceneHandler
         currentNbOfCellsPerRowColumn = round(slider4.getValue());
         grid.setSize(currentNbOfCellsPerRowColumn);
 
-        if (grid.dirty) {
-            GridCellData[] cellsData = new GridCellData[currentNbOfCellsPerRowColumn * currentNbOfCellsPerRowColumn];
-            float iOff = 0.0;
-            for (int i = 0; i < currentNbOfCellsPerRowColumn; ++i)
+        currentIsFilled = toggle2.getBooleanValue();
+
+        noiseLod = round(slider1.getValue());
+        noiseFallOff = slider2.getValue();
+        noiseDetail(noiseLod, noiseFallOff);
+
+        noiseX = xy.getArrayValue()[1];
+        noiseY = xy.getArrayValue()[0];
+
+        GridCellData[] cellsData = new GridCellData[currentNbOfCellsPerRowColumn * currentNbOfCellsPerRowColumn];
+        float iOff = noiseX;
+        for (int i = 0; i < currentNbOfCellsPerRowColumn; ++i)
+        {
+            float jOff = noiseY;
+            for (int j = 0; j < currentNbOfCellsPerRowColumn; ++j)
             {
-                float jOff = 0.0;
-                for (int j = 0; j < currentNbOfCellsPerRowColumn; ++j)
-                {
-                    PerlinData perlinData = new PerlinData();
-                    perlinData.noise = noise(iOff, jOff);
-                    cellsData[j+i*currentNbOfCellsPerRowColumn] = perlinData;
-                    jOff += 0.1;
-                }
-                iOff += 0.1;
+                PerlinData perlinData = new PerlinData();
+                perlinData.noise = noise(iOff, jOff);
+                perlinData.isFilled = currentIsFilled;
+                cellsData[j+i*currentNbOfCellsPerRowColumn] = perlinData;
+                jOff += 0.1;
             }
-            grid.setCellsData(cellsData);
+            iOff += 0.1;
         }
+        grid.setCellsData(cellsData);
 
         currentStrokeWeight = round(slider5.getValue());
         grid.setStrokeWeight(currentStrokeWeight);
@@ -105,6 +135,7 @@ class Scene02 extends SceneHandler
     class PerlinData extends GridCellData
     {
         float noise;
+        boolean isFilled;
     }
 
     class TilePerlinSquare extends Tiles
@@ -120,7 +151,10 @@ class Scene02 extends SceneHandler
                 case PERLIN1:
                     pushStyle();
                     rectMode(CENTER);
-                    fill(255);
+                    noFill();
+                    if (perlinData.isFilled) {
+                        fill(255);
+                    }
                     rect(x + w / 2, y + h / 2, w * perlinData.noise, h * perlinData.noise);
                     popStyle();
                     break;
@@ -141,7 +175,10 @@ class Scene02 extends SceneHandler
                 case PERLIN1:
                     pushStyle();
                     ellipseMode(CENTER);
-                    fill(255);
+                    noFill();
+                    if (perlinData.isFilled) {
+                        fill(255);
+                    }
                     ellipse(x + w / 2, y + h / 2, w * perlinData.noise, h * perlinData.noise);
                     popStyle();
                     break;
