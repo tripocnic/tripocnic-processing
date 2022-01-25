@@ -156,14 +156,14 @@ class Scene02 extends SceneHandler
 
             switch(tileToDraw) {
                 case PERLIN1:
-                    pushStyle();
+                    push();
                     rectMode(CENTER);
                     noFill();
                     if (perlinData.isFilled) {
                         fill(255);
                     }
                     rect(x + w / 2, y + h / 2, w * perlinData.noise, h * perlinData.noise);
-                    popStyle();
+                    pop();
                     break;
             }
         }
@@ -180,14 +180,14 @@ class Scene02 extends SceneHandler
 
             switch(tileToDraw) {
                 case PERLIN1:
-                    pushStyle();
+                    push();
                     ellipseMode(CENTER);
                     noFill();
                     if (perlinData.isFilled) {
                         fill(255);
                     }
                     ellipse(x + w / 2, y + h / 2, w * perlinData.noise, h * perlinData.noise);
-                    popStyle();
+                    pop();
                     break;
             }
         }
