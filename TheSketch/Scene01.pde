@@ -56,39 +56,40 @@ class Scene01 extends SceneHandler
 
         grid.draw();
     }
+
+    class TilesSet
+    {
+        ArrayList<Tiles> tiles;
+
+        final int SIMPLE = 0;
+        final int ARCS = 1;
+        final int ROAD = 2;
+
+        TilesSet()
+        {
+            tiles = new ArrayList<Tiles>();
+
+            // SIMPLE
+            TileSimple tileSimple = new TileSimple();
+            tiles.add(tileSimple);
+
+            // ARCS
+            TileArcs tileArcs = new TileArcs();
+            tiles.add(tileArcs);
+
+            // ROAD
+            TileRoad tileRoad = new TileRoad();
+            tiles.add(tileRoad);
+        }
+
+        int nbTiles(){
+            return tiles.size();
+        }
+
+        Tiles get(int index)
+        {
+        return tiles.get(index);
+        }
+    }
 }
 
-class TilesSet
-{
-    ArrayList<Tiles> tiles;
-
-    final int SIMPLE = 0;
-    final int ARCS = 1;
-    final int ROAD = 2;
-
-    TilesSet()
-    {
-        tiles = new ArrayList<Tiles>();
-
-        // SIMPLE
-        TileSimple tileSimple = new TileSimple();
-        tiles.add(tileSimple);
-
-        // ARCS
-        TileArcs tileArcs = new TileArcs();
-        tiles.add(tileArcs);
-
-        // ROAD
-        TileRoad tileRoad = new TileRoad();
-        tiles.add(tileRoad);
-    }
-
-    int nbTiles(){
-        return tiles.size();
-    }
-
-    Tiles get(int index)
-    {
-      return tiles.get(index);
-    }
-}

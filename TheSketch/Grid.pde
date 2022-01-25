@@ -9,6 +9,7 @@ class Grid {
     int gridHeight;
 
     GridCell[] cells;
+    GridCellData[] cellsData;
     boolean drawBorders;
 
     Tiles tiles;
@@ -48,6 +49,28 @@ class Grid {
             }
         }
         println("Grid set to: number of cells:", nbCellX, "x", nbCellY, "-> cell size:", cellWidth, "x", cellHeight);
+        applyDataToCells();
+    }
+
+    void applyDataToCells()
+    {
+        if (cellsData == null) {
+            return;
+        }
+        if (cellsData.length != cells.length) {
+            println("CellsData not applied: cellsData.length(", cellsData.length, ") is not equal to cells.length(", cells.length, ")");
+            return;
+        }
+
+        for (int i = 0; i < nbCellY; ++i)
+        {
+            for (int j = 0; j < nbCellX; ++j)
+            {
+                this.cells[j+i*nbCellX].setData(this.cellsData[j+i*nbCellX]);
+            }
+        }
+        println("Applied cells data to", nbCellX * nbCellY, "cells");
+        needRedraw = true;
     }
 
     void draw()
@@ -97,6 +120,15 @@ class Grid {
             return;
         }
         this.tiles = tiles;
+        dirty = true;
+    }
+
+    void setCellsData(GridCellData[] cellsData)
+    {
+        if (this.cellsData == cellsData) {
+            return;
+        }
+        this.cellsData = cellsData;
         dirty = true;
     }
 

@@ -1,11 +1,17 @@
+abstract class GridCellData {}
+
 public class GridCell
 {
     int posX;
     int posY;
     int cellWidth;
     int cellHeight;
+
+    GridCellData cellData;
+
     Tiles tiles;
     int tileToDraw;
+
 
     public GridCell(int posX, int posY, int cellWidth, int cellHeight)
     {
@@ -23,10 +29,15 @@ public class GridCell
         }
     }
 
+    void setData(GridCellData cellData)
+    {
+        this.cellData = cellData;
+    }
+
     void draw(boolean drawBorders)
     {
         if (tiles != null) {
-            tiles.draw(posX, posY, cellWidth, cellHeight, tileToDraw);
+            tiles.draw(posX, posY, cellWidth, cellHeight, tileToDraw, cellData);
         }
         if (drawBorders)
         {

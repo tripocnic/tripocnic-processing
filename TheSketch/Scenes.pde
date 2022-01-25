@@ -24,6 +24,7 @@ void setupScenes()
     scenes = new SceneHandler[] {
         new Scene00(),
         new Scene01(),
+        new Scene02(),
     };
     currentSceneNb = scenes.length;
 }
