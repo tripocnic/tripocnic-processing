@@ -6,7 +6,7 @@
         {
             "label": "Processing",
             "type": "shell",
-            "command": "C:\\Program Files\\processing-3.5.4\\processing-java",
+            "command": "C:\\Program Files\\processing-4.0.1\\processing-java",
             "args": [
                 "--force",
                 "--sketch=${fileDirname}",
