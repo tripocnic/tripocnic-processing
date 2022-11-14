@@ -1,9 +1,9 @@
 # TheSketch
 
-Requires Processing 3.5.4.
+Requires Processing 4.0.1.
 
 Required libraries:
-* controlP5
+* ControlP5
 
 ## How to use TheSketch
 Get help in the console by pressing the "h" key.
@@ -16,3 +16,6 @@ This is the beginning of any new scene.
 
 ### Scene 01: TheTruchetTiles
 Variations on [Truchet tiles](https://en.wikipedia.org/wiki/Truchet_tiles)
+
+### Scene 02: ThePerlinGrid
+Variations on Perlin noise in a grid
