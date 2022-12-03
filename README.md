@@ -1,6 +1,6 @@
 # TheSketch
 
-Requires Processing 4.0.1.
+Tested on Processing 4.1.1.
 
 Required libraries:
 * ControlP5
